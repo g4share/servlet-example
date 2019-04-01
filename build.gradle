@@ -1,0 +1,17 @@
+plugins {
+    id 'groovy'
+    id 'jacoco'
+    id 'war'
+    id 'org.gretty' version '4.1.3'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 21
+targetCompatibility = 21
+
+version = '1.0'
+group = 'com.g4share.servlet'
+description = 'Servlet Example'
