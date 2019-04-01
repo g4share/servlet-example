@@ -1,0 +1,41 @@
+apply from: 'dependencies.gradle'
+
+allprojects {
+    version = '0.1'
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    dependencies {
+        compileOnly libraries.lombok
+        annotationProcessor libraries.lombok
+
+        testCompileOnly libraries.lombok
+        testAnnotationProcessor libraries.lombok
+
+        implementation libraries.log
+        implementation libraries.jstl
+        implementation libraries.bcrypt
+        implementation libraries.gson
+
+        //providedCompile libraries.servlet_api
+
+        testImplementation libraries.junit
+    }
+}

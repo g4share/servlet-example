@@ -1,0 +1,6 @@
+rootProject.name = 'servlet-example'
+
+include ':common',
+        ':di',
+        ':controller',
+        ':rest'

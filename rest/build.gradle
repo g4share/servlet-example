@@ -1,0 +1,14 @@
+plugins {
+    id 'org.gretty' version '4.1.3'
+}
+
+dependencies {
+    implementation project(':common')
+            project(':di')
+            project(':controller')
+}
+
+gretty {
+    servletContainer = 'tomcat10'
+    contextPath = '/servlet-example'
+}
