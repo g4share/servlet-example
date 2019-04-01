@@ -1,0 +1,54 @@
+ext {
+    versions = [:]
+    libraries = [:]
+}
+
+versions.lombok = '1.18.32'
+
+versions.servlet_api = '6.1.0-M2'
+versions.jsp_api = '4.0.0-M2'
+versions.jstl = '3.0.0'
+
+versions.slf4j = '2.0.12'
+versions.logback = '1.5.3'
+
+versions.bcrypt = '0.4'
+
+versions.gson = '2.10.1'
+
+versions.junit = '5.10.0'
+versions.assertj = '3.25.3'
+
+libraries.lombok = [
+    "org.projectlombok:lombok:${versions.lombok}"
+]
+
+libraries.servlet_api = [
+    "jakarta.servlet:jakarta.servlet-api:${versions.servlet_api}",
+    "jakarta.servlet.jsp:jakarta.servlet.jsp-api:${versions.jsp_api}"
+]
+
+libraries.jstl = [
+    "jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:${versions.jstl}"
+]
+
+libraries.log = [
+    "org.slf4j:slf4j-api:${versions.slf4j}",
+    "ch.qos.logback:logback-classic:${versions.logback}",
+    "ch.qos.logback:logback-core:${versions.logback}"
+]
+
+libraries.bcrypt = [
+    "org.mindrot:jbcrypt:${versions.bcrypt}"
+]
+
+libraries.gson = [
+    "com.google.code.gson:gson:${versions.gson}"
+]
+
+libraries.junit = [
+    "org.junit.jupiter:junit-jupiter-api:${versions.junit}",
+    "org.junit.jupiter:junit-jupiter-params:${versions.junit}",
+    "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",
+    "org.assertj:assertj-core:${versions.assertj}"
+]
