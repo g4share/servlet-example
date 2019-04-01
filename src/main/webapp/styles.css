@@ -1,0 +1,14 @@
+.selected {
+    border-bottom: 3px solid white;
+}
+
+.text-container pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    padding-top: 20px;
+    padding-left: 20px;
+    border-left: 2px solid black;
+    overflow-y: auto;
+    height: 300px;
+}

@@ -1,0 +1,11 @@
+login=unauthorized
+logout=authorized
+
+hello,hello-api=unauthorized,authorized
+
+auth/hello=authorized
+admin/hello=admin
+
+,index.jsp=unauthorized,authorized
+
+Servlet-JSP-Tutorial.png,styles.css=unauthorized,authorized

@@ -1,0 +1,22 @@
+<taglib>
+    <tlib-version>2.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>Custom TLD</short-name>
+    <tag>
+        <name>userName</name>
+        <tag-class>com.g4share.http.tag.CurrentUserTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+    <tag>
+        <name>logged</name>
+        <tag-class>com.g4share.http.tag.LoggedTag</tag-class>
+        <body-content>scriptless</body-content>
+
+        <attribute>
+            <name>messageLogged</name>
+        </attribute>
+        <attribute>
+            <name>messageNotLogged</name>
+        </attribute>
+    </tag>
+</taglib>
