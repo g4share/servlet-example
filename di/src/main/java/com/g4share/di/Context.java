@@ -11,9 +11,6 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 public class Context {
-
-    private final String[] basePackages;
-    private final Class<? extends Annotation>[] typeAnnotations;
     private final Class<? extends Annotation> injectAnnotation;
 
     private final ReflectionHelper reflectionHelper;
@@ -21,16 +18,21 @@ public class Context {
     private final List<AnnotatedType> loadedType;
     private final BeanStorage beanStorage = new BeanStorage();
 
-    public Context(String[] basePackages,
-                   Class<? extends Annotation>[] typeAnnotations,
-                   Class<? extends Annotation> injectAnnotation,
-                   ReflectionHelper reflectionHelper) {
-        this.basePackages = basePackages;
-        this.typeAnnotations = typeAnnotations;
+    public Context(final List<String> basePackages,
+                   final List<Class<? extends Annotation>> typeAnnotations,
+                   final Class<? extends Annotation> injectAnnotation,
+                   final ReflectionHelper reflectionHelper) {
+
         this.injectAnnotation = injectAnnotation;
         this.reflectionHelper = reflectionHelper;
 
         loadedType = reflectionHelper.load(basePackages, typeAnnotations);
+    }
+
+    public List<AnnotatedType> filter(Class<? extends Annotation> annotation) {
+        return loadedType.stream()
+                .filter(t -> t.annotations().contains(annotation))
+                .toList();
     }
 
     public <T> T load(Class<T> clazz) throws ClassNotLoadedException {

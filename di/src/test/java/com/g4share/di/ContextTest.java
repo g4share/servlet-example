@@ -19,6 +19,8 @@ import com.g4share.di.package4.ParentNoConstructor;
 import com.g4share.di.reflection.ReflectionHelper;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,8 +30,8 @@ class ContextTest {
 
     @Test
     void load() {
-        Context context = new Context(new String[] { "com.g4share.di" },
-                new Class[] { Ann1.class, Ann2.class },
+        Context context = new Context(List.of("com.g4share.di"),
+                List.of(Ann1.class, Ann2.class),
                 ConstructorAnnotation.class,
                 reflectionHelper);
 
@@ -38,8 +40,8 @@ class ContextTest {
 
     @Test
     void loadClass() {
-        Context context = new Context(new String[] { "com.g4share.di" },
-                new Class[] { Ann.class },
+        Context context = new Context(List.of("com.g4share.di"),
+                List.of(Ann.class),
                 ConstructorAnnotation.class,
                 reflectionHelper);
 
@@ -60,8 +62,8 @@ class ContextTest {
 
     @Test
     void loadClassWithExceptions() {
-        Context context = new Context(new String[] { "com.g4share.di" },
-                new Class[] { Ann.class },
+        Context context = new Context(List.of("com.g4share.di"),
+                List.of(Ann.class),
                 ConstructorAnnotation.class,
                 reflectionHelper);
 

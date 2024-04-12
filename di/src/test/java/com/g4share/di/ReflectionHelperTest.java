@@ -29,8 +29,8 @@ class ReflectionHelperTest {
 
     @ParameterizedTest
     @MethodSource("paramsMethod")
-    void load(String[] basePackages,
-              Class<? extends Annotation>[] annotations,
+    void load(List<String> basePackages,
+              List<Class<? extends Annotation>> annotations,
               Class<?>[] expectedClasses) {
         List<AnnotatedType> types = reflectionHelper.load(basePackages, annotations);
         assertThat(reflectionHelper.transform(types)).containsAll(Set.of(expectedClasses));
@@ -38,36 +38,36 @@ class ReflectionHelperTest {
 
     private static Stream<Arguments> paramsMethod() {
         return Stream.of(
-                Arguments.of(new String[] { "com.g4share.di" },
-                        new Class[] { Annotation1.class, Annotation2.class },
+                Arguments.of(List.of("com.g4share.di"),
+                        List.of(Annotation1.class, Annotation2.class),
                         new Class[] { AnnotatedClass1.class,
                                 AnnotatedClass2.class,
                                 AnnotatedClass3.class,
                                 AnnotatedClass4.class,
                                 AnnotatedClass5.class} ),
 
-                Arguments.of(new String[] { "com.g4share.di.package1", "com.g4share.di.package2" },
-                        new Class[] { Annotation1.class, Annotation2.class },
+                Arguments.of(List.of("com.g4share.di.package1", "com.g4share.di.package2"),
+                        List.of(Annotation1.class, Annotation2.class),
                         new Class[] { AnnotatedClass1.class,
                                 AnnotatedClass2.class,
                                 AnnotatedClass3.class,
                                 AnnotatedClass4.class,
                                 AnnotatedClass5.class} ),
 
-                Arguments.of(new String[] { "com.g4share.di" },
-                        new Class[] { Annotation1.class },
+                Arguments.of(List.of("com.g4share.di"),
+                        List.of(Annotation1.class),
                         new Class[] { AnnotatedClass1.class,
                                 AnnotatedClass2.class,
                                 AnnotatedClass3.class,
                                 AnnotatedClass4.class, } ),
 
-                Arguments.of(new String[] { "com.g4share.di" },
-                        new Class[] { Annotation2.class },
+                Arguments.of(List.of("com.g4share.di"),
+                        List.of(Annotation2.class),
                         new Class[] { AnnotatedClass2.class,
                                 AnnotatedClass5.class} ),
 
-                Arguments.of(new String[] { "com.g4share.di" },
-                        new Class[] { Annotation3.class },
+                Arguments.of(List.of("com.g4share.di"),
+                        List.of(Annotation3.class),
                         new Class[] { } )
         );
     }

@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':common')
-            project(':di')
+    implementation project(':di')
             project(':controller')
 }
 

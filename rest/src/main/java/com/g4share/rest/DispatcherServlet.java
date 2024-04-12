@@ -2,6 +2,8 @@
 
 package com.g4share.rest;
 
+import com.g4share.di.reflection.ReflectionHelper;
+import com.g4share.rest.di.RestContext;
 import com.g4share.rest.exception.GenericException;
 import com.g4share.rest.exception.MethodNotSupportedException;
 import com.g4share.rest.helper.SessionHelper;
@@ -13,17 +15,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = { "/*" })
 public class DispatcherServlet extends HttpServlet {
 
-    private SessionHelper sessionHelper = new SessionHelper();
+    private final SessionHelper sessionHelper = new SessionHelper();
+    private RestContext context;
+
+
+    private List<?> controllers;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+
+        context = RestContext.getInstance();
+        controllers = context.loadControllers();
+        context.getEndpoints(controllers);
+
+        System.out.println("controllers " + controllers);
 
         System.out.println("DispatcherServlet init");
     }
@@ -41,6 +54,11 @@ public class DispatcherServlet extends HttpServlet {
 
     private void service(HTTP_METHOD method, HttpServletRequest req, HttpServletResponse resp) {
         String body = body(method, req);
+
+        Object controller = controllers.getFirst();
+        sessionHelper.getEndpoints(controller);
+
+        String result = controllers.get(0).
 
         System.out.println(req.getMethod() + ":  " + sessionHelper.path(req)
                 + (body == null || body.isEmpty() ? "" : "\n" + body));

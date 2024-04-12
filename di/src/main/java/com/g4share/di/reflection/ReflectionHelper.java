@@ -13,7 +13,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +29,7 @@ public class ReflectionHelper {
         this.classLoader = classLoader;
     }
 
-    public List<AnnotatedType> load(String[] basePackages, Class<? extends Annotation>[] typeAnnotations) {
+    public List<AnnotatedType> load(List<String> basePackages, List<Class<? extends Annotation>> typeAnnotations) {
         List<URL> urls = (List<URL>) collect(ArrayList::new, basePackages,
                 p -> ClasspathHelper.forPackage(p, classLoader));
 
@@ -47,9 +46,9 @@ public class ReflectionHelper {
     }
 
     private AnnotatedType annotatedType(Class<?> clazz,
-                                        Class<? extends Annotation>[] typeAnnotations) {
+                                        List<Class<? extends Annotation>> typeAnnotations) {
         List<Class<? extends Annotation>> annotations = new ArrayList<>();
-        Arrays.stream(typeAnnotations).forEach(a -> {
+        typeAnnotations.forEach(a -> {
             Annotation annotation = clazz.getAnnotation(a);
             if (annotation != null) {
                 annotations.add(a);
@@ -66,11 +65,10 @@ public class ReflectionHelper {
     }
 
     private <R, I> Collection<R> collect(Supplier<Collection<R>> resultCreator,
-                                         I[] input,
+                                         List<I> input,
                                          Function<I, Collection<? extends R>> transformer) {
         Collection<R> collection = resultCreator.get();
-        Arrays.stream(input)
-                .forEach(p -> collection.addAll(transformer.apply(p)));
+        input.forEach(p -> collection.addAll(transformer.apply(p)));
         return collection;
     }
 
